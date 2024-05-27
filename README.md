@@ -4,6 +4,8 @@
 
 ![](https://jari.lol/KCB4gNo4Xg.gif)
 
+This is a fork of https://github.com/gatsby-uc/gatsby-plugin-s3 updated for AWS SDK v3
+
 Enables you to deploy your gatsby site to a S3 bucket.
 Requires very little configuration, while optimizing your site as much as possible.
 
@@ -22,7 +24,7 @@ Requires very little configuration, while optimizing your site as much as possib
 Install the plugin:
 
 ```bash
-npm i gatsby-plugin-s3
+npm i @pixelfusion-nz/gatsby-plugin-s3
 ```
 
 Add it to your `gatsby-config.js` & configure the bucket name (required)
@@ -30,7 +32,7 @@ Add it to your `gatsby-config.js` & configure the bucket name (required)
 ```js
 plugins: [
     {
-        resolve: `gatsby-plugin-s3`,
+        resolve: `@pixelfusion/gatsby-plugin-s3`,
         options: {
             bucketName: 'my-website-bucket',
         },

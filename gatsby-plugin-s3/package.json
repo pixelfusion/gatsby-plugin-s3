@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-plugin-s3",
+    "name": "@pixelfusion-nz/gatsby-plugin-s3",
     "version": "0.4.1",
     "description": "Enables you to deploy your gatsby site to a S3 bucket.",
     "main": "index.js",
@@ -17,7 +17,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jariz/gatsby-plugin-s3.git"
+        "url": "git+https://github.com/pixelfusion/gatsby-plugin-s3.git"
     },
     "keywords": [
         "gatsby",

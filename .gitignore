@@ -2,3 +2,5 @@ node_modules
 reports
 .env
 **/.env
+# Only copied temporarily during publish
+gatsby-plugin-s3/readme.md

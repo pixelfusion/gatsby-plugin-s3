@@ -32,7 +32,7 @@ Add it to your `gatsby-config.js` & configure the bucket name (required)
 ```js
 plugins: [
     {
-        resolve: `@pixelfusion/gatsby-plugin-s3`,
+        resolve: `@pixelfusion-nz/gatsby-plugin-s3`,
         options: {
             bucketName: 'my-website-bucket',
         },

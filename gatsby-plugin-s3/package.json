@@ -1,71 +1,71 @@
 {
-    "name": "@pixelfusion-nz/gatsby-plugin-s3",
-    "version": "1.0.1",
-    "description": "Enables you to deploy your gatsby site to a S3 bucket.",
-    "main": "index.js",
-    "bin": {
-        "gatsby-plugin-s3": "bin.js"
-    },
-    "scripts": {
-        "prepublish": "npm run build",
-        "build": "tsc --project .",
-        "typecheck": "tsc --project . --noEmit",
-        "develop": "babel --extensions=\".ts\" --out-dir=. src/ -w",
-        "lint": "eslint \"src/**.ts\" -f junit -o ../reports/gatsby-plugin-s3-linter-results.xml",
-        "snyk-protect": "snyk-protect",
-        "prepare": "npm run snyk-protect"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/pixelfusion/gatsby-plugin-s3.git"
-    },
-    "keywords": [
-        "gatsby",
-        "gatsby-plugin",
-        "aws",
-        "s3",
-        "aws-sdk"
-    ],
-    "peerDependencies": {
-        "gatsby": ">2.0.0-alpha"
-    },
-    "author": "Jari Zwarts <jarizw@gmail.com>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/jariz/gatsby-plugin-s3/issues"
-    },
-    "homepage": "https://github.com/jariz/gatsby-plugin-s3#readme",
-    "devDependencies": {
-        "@snyk/protect": "^1.1190.0",
-        "@types/async": "^3.2.20",
-        "@types/fs-extra": "^11.0.1",
-        "@types/inquirer": "^9.0.3",
-        "@types/is-ci": "^3.0.0",
-        "@types/klaw": "^3.0.3",
-        "@types/mime": "^3.0.1",
-        "@types/node": "^20.4.2",
-        "@types/stream-to-promise": "^2.2.1"
-    },
-    "dependencies": {
-        "@aws-sdk/client-s3": "^3.370.0",
-        "@aws-sdk/lib-storage": "^3.370.0",
-        "@aws-sdk/node-http-handler": "^3.370.0",
-        "@aws-sdk/util-retry": "^3.370.0",
-        "@babel/polyfill": "^7.12.1",
-        "async": "^3.2.4",
-        "chalk": "^4.1.2",
-        "fs-extra": "^11.1.1",
-        "fs-posix": "^6.0.0",
-        "inquirer": "^8.2.5",
-        "is-ci": "^3.0.1",
-        "klaw": "^4.1.0",
-        "mime": "^3.0.0",
-        "minimatch": "^9.0.3",
-        "ora": "^5.4.1",
-        "pretty-error": "^4.0.0",
-        "proxy-agent": "^6.2.2",
-        "stream-to-promise": "^3.0.0",
-        "yargs": "^17.7.2"
-    },
-    "snyk": true
+  "name": "@pixelfusion-nz/gatsby-plugin-s3",
+  "version": "1.0.4",
+  "description": "Enables you to deploy your gatsby site to a S3 bucket.",
+  "main": "index.js",
+  "bin": {
+    "gatsby-plugin-s3": "bin.js"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc --project .",
+    "typecheck": "tsc --project . --noEmit",
+    "develop": "babel --extensions=\".ts\" --out-dir=. src/ -w",
+    "lint": "eslint \"src/**.ts\" -f junit -o ../reports/gatsby-plugin-s3-linter-results.xml",
+    "snyk-protect": "snyk-protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixelfusion/gatsby-plugin-s3.git"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "aws",
+    "s3",
+    "aws-sdk"
+  ],
+  "peerDependencies": {
+    "gatsby": ">2.0.0-alpha"
+  },
+  "author": "Jari Zwarts <jarizw@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jariz/gatsby-plugin-s3/issues"
+  },
+  "homepage": "https://github.com/jariz/gatsby-plugin-s3#readme",
+  "devDependencies": {
+    "@snyk/protect": "^1.1190.0",
+    "@types/async": "^3.2.20",
+    "@types/fs-extra": "^11.0.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/is-ci": "^3.0.0",
+    "@types/klaw": "^3.0.3",
+    "@types/mime": "^3.0.1",
+    "@types/node": "^20.4.2",
+    "@types/stream-to-promise": "^2.2.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.370.0",
+    "@aws-sdk/lib-storage": "^3.370.0",
+    "@aws-sdk/node-http-handler": "^3.370.0",
+    "@aws-sdk/util-retry": "^3.370.0",
+    "@babel/polyfill": "^7.12.1",
+    "async": "^3.2.4",
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.1.1",
+    "fs-posix": "^6.0.0",
+    "inquirer": "^8.2.5",
+    "is-ci": "^3.0.1",
+    "klaw": "^4.1.0",
+    "mime": "^3.0.0",
+    "minimatch": "^9.0.3",
+    "ora": "^5.4.1",
+    "pretty-error": "^4.0.0",
+    "proxy-agent": "^6.2.2",
+    "stream-to-promise": "^3.0.0",
+    "yargs": "^17.7.2"
+  },
+  "snyk": true
 }

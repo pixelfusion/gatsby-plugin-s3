@@ -1,6 +1,6 @@
 default: help
 release: ## Tag a new version
-	cp readme.md ./gatsby-plugin-s3/readme.md
+	cp README.md ./gatsby-plugin-s3/README.md
 	cd ./gatsby-plugin-s3 && npm run build && npm publish --access public
 	cd ..
 help: ## Display a list of commands

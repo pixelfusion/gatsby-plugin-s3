@@ -12,7 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Configure git user
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
       - name: Tag semantic release
         id: tag
         uses: pixelfusion/actions/tag@v1
-
+      - name: Run release
+        shell: bash
+        run: make release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

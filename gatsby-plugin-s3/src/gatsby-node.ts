@@ -37,6 +37,19 @@ const buildRedirect = (pluginOptions: S3PluginOptions, route: GatsbyRedirect): R
     };
 };
 
+// Validate that the redirect does not point to a parent directory
+const detectInfinityLoop = (rule: RoutingRule, pluginOptions: S3PluginOptions): boolean => {
+    if (!rule.Redirect || !rule.Condition) {
+        return false;
+    }
+
+    const redirectPath = rule.Redirect.ReplaceKeyWith || '';
+    const conditionPath = rule.Condition.KeyPrefixEquals || '';
+    const hostnamesMatch = rule.Redirect.HostName?.toLowerCase() === pluginOptions.hostname?.toLowerCase();
+
+    return hostnamesMatch && redirectPath.startsWith(conditionPath);
+};
+
 // converts gatsby redirects + rewrites to S3 routing rules
 // https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules.html
 const getRules = (pluginOptions: S3PluginOptions, routes: GatsbyRedirect[]): Array<RoutingRule> =>
@@ -51,11 +64,7 @@ const getRules = (pluginOptions: S3PluginOptions, routes: GatsbyRedirect[]): Arr
         }))
         // Disallow infinite redirects (child page to parent)
         // See https://github.com/gatsby-uc/gatsby-plugin-s3/issues/207
-        .filter(rule => (
-            !rule.Redirect.ReplaceKeyWith?.startsWith(
-                rule.Condition.KeyPrefixEquals || ''
-            )
-        ));
+        .filter(rule => !detectInfinityLoop(rule, pluginOptions));
 
 let params: Params = {};
 
@@ -143,7 +152,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = ({ store }, userPluginOpti
 
         if (routingRules.length > 50) {
             throw new Error(
-                `${ routingRules.length } routing rules provided, the number of routing rules 
+                `${ routingRules.length } routing rules provided, the number of routing rules
 in a website configuration is limited to 50.
 Try setting the 'generateRedirectObjectsForPermanentRedirects' configuration option.`
             );

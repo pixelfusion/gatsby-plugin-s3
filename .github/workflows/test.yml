@@ -1,0 +1,17 @@
+name: Package Lock Diff
+
+on:
+  pull_request:
+    paths:
+      - "package-lock.json"
+      - "**/package-lock.json"
+
+jobs:
+  package-lock-diff:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Package lock diff
+        uses: tractorcow/beefdiff/action@master

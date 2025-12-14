@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import '@babel/polyfill';
-import 'fs-posix';
 import AWS_S3, {
     _Object as S3Object,
+    BucketLocationConstraint,
     CreateBucketRequest,
     DeletePublicAccessBlockRequest,
     ListObjectsV2CommandOutput,
@@ -32,7 +32,8 @@ import { createHash } from 'crypto';
 import isCI from 'is-ci';
 import { getS3WebsiteDomainUrl, withoutLeadingSlash } from './utilities';
 import { AsyncFunction, asyncify, parallelLimit } from 'async';
-import { ProxyAgent } from 'proxy-agent';
+import { HttpProxyAgent } from 'http-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Provider } from '@smithy/types';
 import { NodeHttpHandler } from '@aws-sdk/node-http-handler';
 import { ConfiguredRetryStrategy, StandardRetryStrategy } from '@aws-sdk/util-retry';
@@ -133,9 +134,11 @@ export interface DeployArguments {
     userAgent?: string;
 }
 
-export const makeAgent = (proxy?: string): ProxyAgent | undefined => proxy
-    ? new ProxyAgent({ getProxyForUrl: () => proxy })
-    : undefined
+export const makeHttpAgent = (proxy?: string): HttpProxyAgent<string> | undefined =>
+    proxy ? new HttpProxyAgent(proxy) : undefined;
+
+export const makeHttpsAgent = (proxy?: string): HttpsProxyAgent<string> | undefined =>
+    proxy ? new HttpsProxyAgent(proxy) : undefined;
 
 export const deploy = async ({ yes, bucket, userAgent }: DeployArguments = {}): Promise<void> => {
     const spinner = ora({ text: 'Retrieving bucket info...', color: 'magenta', stream: process.stdout }).start();
@@ -162,8 +165,8 @@ export const deploy = async ({ yes, bucket, userAgent }: DeployArguments = {}): 
             endpoint: config.customAwsEndpointHostname,
             customUserAgent: userAgent ?? '',
             requestHandler: new NodeHttpHandler({
-                httpAgent: makeAgent(process.env.HTTP_PROXY),
-                httpsAgent: makeAgent(process.env.HTTPS_PROXY),
+                httpAgent: makeHttpAgent(process.env.HTTP_PROXY),
+                httpsAgent: makeHttpsAgent(process.env.HTTPS_PROXY || process.env.HTTP_PROXY),
                 requestTimeout: config.timeout,
                 connectionTimeout: config.connectTimeout,
             }),
@@ -220,7 +223,7 @@ export const deploy = async ({ yes, bucket, userAgent }: DeployArguments = {}): 
             // If non-default region, specify it here (us-east-1 is default)
             if (config.region && config.region !== 'us-east-1') {
                 createParams.CreateBucketConfiguration = {
-                    LocationConstraint: config.region,
+                    LocationConstraint: config.region as BucketLocationConstraint,
                 };
             }
             await s3.createBucket(createParams);

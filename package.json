@@ -46,5 +46,20 @@
         "gatsby-plugin-s3-e2e-tests": "file:gatsby-plugin-s3-e2e-tests",
         "gatsby-plugin-s3-example-with-redirects": "file:examples\\with-redirects",
         "gatsby-plugin-s3-example-with-serverless": "file:examples\\with-serverless"
+    },
+    "overrides": {
+        "gatsby-parcel-config": {
+            "@parcel/bundler-default": "^2.16.3",
+            "@parcel/compressor-raw": "^2.16.3",
+            "@parcel/namer-default": "^2.16.3",
+            "@parcel/optimizer-terser": "^2.16.3",
+            "@parcel/packager-js": "^2.16.3",
+            "@parcel/packager-raw": "^2.16.3",
+            "@parcel/reporter-dev-server": "^2.16.3",
+            "@parcel/resolver-default": "^2.16.3",
+            "@parcel/runtime-js": "^2.16.3",
+            "@parcel/transformer-js": "^2.16.3",
+            "@parcel/transformer-json": "^2.16.3"
+        }
     }
 }

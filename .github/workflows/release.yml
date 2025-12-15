@@ -3,8 +3,14 @@ on:
   push:
     branches:
       - master
+permissions:
+  contents: write # to be able to publish a GitHub release
+  issues: write # to be able to comment on released issues
+  pull-requests: write # to be able to comment on released pull requests
+  id-token: write # to enable use of OIDC for trusted publishing and npm provenance
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_CONFIG_PROVENANCE: true
 jobs:
   tag:
     name: Tag with semantic release
@@ -12,11 +18,11 @@ jobs:
     environment: production
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
       - name: Configure git user
         run: |
@@ -25,6 +31,11 @@ jobs:
       - name: Tag semantic release
         id: tag
         uses: pixelfusion/actions/tag@v1
-      - name: Run release
-        shell: bash
-        run: make release
+      - name: Copy README to plugin directory
+        run: cp README.md ./gatsby-plugin-s3/README.md
+      - name: Install dependencies, build and publish
+        run: |
+          cd ./gatsby-plugin-s3
+          npm ci
+          npm run build
+          npm publish --access public

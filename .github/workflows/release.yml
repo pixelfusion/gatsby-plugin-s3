@@ -18,8 +18,6 @@ jobs:
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
-      - name: Authenticate with NPM
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Configure git user
         run: |
           git config user.name "${{ github.actor }}"
@@ -30,5 +28,3 @@ jobs:
       - name: Run release
         shell: bash
         run: make release
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

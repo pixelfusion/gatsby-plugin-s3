@@ -10,7 +10,6 @@ permissions:
   id-token: write # to enable use of OIDC for trusted publishing and npm provenance
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NPM_CONFIG_PROVENANCE: true
 jobs:
   tag:
     name: Tag with semantic release
@@ -24,8 +23,6 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      - name: Update npm
-        run: npm install -g npm@latest
       - name: Configure git user
         run: |
           git config user.name "${{ github.actor }}"
@@ -38,6 +35,8 @@ jobs:
       - name: Install dependencies, build and publish
         run: |
           cd ./gatsby-plugin-s3
+          npm install -g npm@latest
+          npm -v
           npm ci
           npm run build
-          npm publish --access public
+          npm publish

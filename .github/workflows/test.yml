@@ -15,3 +15,19 @@ jobs:
     steps:
       - name: Package lock diff
         uses: tractorcow/beefdiff/action@master
+
+  build-gatsby-plugin-s3:
+    name: Build gatsby-plugin-s3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and build gatsby-plugin-s3
+        run: |
+          cd gatsby-plugin-s3
+          npm ci
+          npm run build

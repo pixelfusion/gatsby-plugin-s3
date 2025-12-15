@@ -18,7 +18,7 @@
         "@types/klaw": "^3.0.3",
         "@types/mime": "^3.0.1",
         "@types/minimatch": "^5.1.2",
-        "@types/node": "^20.4.2",
+        "@types/node": "^24.0.0",
         "@types/node-fetch": "^2.6.4",
         "@types/ora": "^3.2.0",
         "@types/stream-to-promise": "^2.2.1",

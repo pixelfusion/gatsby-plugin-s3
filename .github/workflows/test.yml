@@ -1,17 +1,21 @@
-name: Package Lock Diff
+name: Build Test
 
 on:
   pull_request:
-    paths:
-      - "package-lock.json"
-      - "**/package-lock.json"
 
 jobs:
-  package-lock-diff:
+  build-gatsby-plugin-s3:
+    name: Build gatsby-plugin-s3
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
-      - name: Package lock diff
-        uses: tractorcow/beefdiff/action@master
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and build gatsby-plugin-s3
+        run: |
+          cd gatsby-plugin-s3
+          npm ci
+          npm run build

@@ -2,7 +2,7 @@ import { CACHING_PARAMS, DEFAULT_OPTIONS, GatsbyRedirect, GatsbyState, Params, S
 import fs from 'fs';
 import path from 'path';
 import { URL } from 'url';
-import { Condition, PutObjectCommandInput, Redirect, RoutingRule } from '@aws-sdk/client-s3';
+import { Condition, Protocol, PutObjectCommandInput, Redirect, RoutingRule } from '@aws-sdk/client-s3';
 import { withoutLeadingSlash, withoutTrailingSlash } from './utilities';
 import { GatsbyNode, Page } from 'gatsby';
 
@@ -25,7 +25,7 @@ const buildRedirect = (pluginOptions: S3PluginOptions, route: GatsbyRedirect): R
         return {
             ReplaceKeyWith: withoutTrailingSlash(withoutLeadingSlash(url.href.replace(url.origin, ''))),
             HttpRedirectCode: route.isPermanent ? '301' : '302',
-            Protocol: url.protocol.slice(0, -1),
+            Protocol: url.protocol.match(/^https/i) ? Protocol.https : Protocol.http,
             HostName: url.hostname,
         };
     }

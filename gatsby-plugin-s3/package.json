@@ -1,6 +1,6 @@
 {
   "name": "@pixelfusion-nz/gatsby-plugin-s3",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Enables you to deploy your gatsby site to a S3 bucket.",
   "main": "index.js",
   "bin": {

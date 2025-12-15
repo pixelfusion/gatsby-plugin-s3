@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+      - name: Update npm
+        run: npm install -g npm@latest
       - name: Configure git user
         run: |
           git config user.name "${{ github.actor }}"

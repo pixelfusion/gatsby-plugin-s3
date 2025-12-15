@@ -1,7 +1,8 @@
 import crypto from 'crypto';
 import path from 'path';
 import { fork } from 'child_process';
-import { ProxyAgent } from 'proxy-agent';
+import { HttpProxyAgent } from 'http-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Readable } from 'stream';
 import { S3, ListObjectsV2CommandOutput } from "@aws-sdk/client-s3";
 import resolvePackagePath from 'resolve-package-path';
@@ -23,16 +24,18 @@ export const getUrl = async (url: string) => axios.get(url, {
     maxRedirects: 0, validateStatus: (status) => status >= 200 && status < 500
 })
 
-export const makeAgent = (proxy?: string): ProxyAgent | undefined => proxy
-    ? new ProxyAgent({ getProxyForUrl: () => proxy })
-    : undefined
+export const makeHttpAgent = (proxy?: string): HttpProxyAgent<string> | undefined =>
+    proxy ? new HttpProxyAgent(proxy) : undefined;
+
+export const makeHttpsAgent = (proxy?: string): HttpsProxyAgent<string> | undefined =>
+    proxy ? new HttpsProxyAgent(proxy) : undefined;
 
 export const s3 = new S3({
     region,
     customUserAgent: 'TestPerms/Admin+PutObject',
     requestHandler: new NodeHttpHandler({
-        httpAgent: makeAgent(process.env.HTTP_PROXY),
-        httpsAgent: makeAgent(process.env.HTTPS_PROXY),
+        httpAgent: makeHttpAgent(process.env.HTTP_PROXY),
+        httpsAgent: makeHttpsAgent(process.env.HTTPS_PROXY || process.env.HTTP_PROXY),
     }),
 });
 

@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
         "outDir": ".",
+        "rootDir": "./src",
         "module": "commonjs",
         "target": "es2017",
         "downlevelIteration": true,
+        "ignoreDeprecations": "6.0",
         "lib": ["dom", "es2017"],
         "sourceMap": true,
         "allowJs": false,

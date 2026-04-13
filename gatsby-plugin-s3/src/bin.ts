@@ -74,7 +74,7 @@ const getBucketInfo = async (config: S3PluginOptions, s3: S3): Promise<{ exists:
             region: detectedRegion,
         };
     } catch (ex) {
-        if (isNoSuchBucket(ex)) {
+        if (ex instanceof Error && isNoSuchBucket(ex)) {
             return {
                 exists: false,
                 region: await guessRegion(config.region || s3.config.region),
@@ -391,7 +391,7 @@ export const deploy = async ({ yes, bucket, userAgent }: DeployArguments = {}): 
 {dim   Created Redirect {cyan ${ key }} => {cyan ${ redirectLocation }}}\n`;
                     } catch (ex) {
                         spinner.fail(chalk`Upload failure for object {cyan ${ key }}`);
-                        console.error(pe.render(ex));
+                        console.error(pe.render(ex instanceof Error ? ex : new Error(String(ex))));
                         process.exit(1);
                     }
                 })
@@ -447,7 +447,7 @@ export const deploy = async ({ yes, bucket, userAgent }: DeployArguments = {}): 
         }
     } catch (ex) {
         spinner.fail('Failed.');
-        console.error(pe.render(ex));
+        console.error(pe.render(ex instanceof Error ? ex : new Error(String(ex))));
         process.exit(1);
     }
 };

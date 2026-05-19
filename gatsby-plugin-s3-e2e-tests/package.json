@@ -24,7 +24,7 @@
     "dependencies": {
         "@aws-sdk/client-s3": "^3.370.0",
         "@aws-sdk/node-http-handler": "^3.370.0",
-        "axios": "^1.15.0",
+        "axios": "^1.16.1",
         "dotenv": "^16.3.1",
         "gatsby-plugin-s3-example-with-redirects": "../examples/with-redirects",
         "glob": "^10.3.3",

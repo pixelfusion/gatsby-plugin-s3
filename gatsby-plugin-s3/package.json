@@ -68,5 +68,8 @@
     "stream-to-promise": "^3.0.0",
     "yargs": "^17.7.2"
   },
-  "snyk": true
+  "snyk": true,
+  "overrides": {
+    "webpack@<5.107.2": "5.107.2"
+  }
 }

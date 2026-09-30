@@ -44,10 +44,12 @@
     "dependencies": {
         "gatsby-plugin-s3": "file:gatsby-plugin-s3",
         "gatsby-plugin-s3-e2e-tests": "file:gatsby-plugin-s3-e2e-tests",
-        "gatsby-plugin-s3-example-with-redirects": "file:examples\\with-redirects",
-        "gatsby-plugin-s3-example-with-serverless": "file:examples\\with-serverless"
+        "gatsby-plugin-s3-example-with-redirects": "file:examples/with-redirects",
+        "gatsby-plugin-s3-example-with-serverless": "file:examples/with-serverless"
     },
     "overrides": {
+        "lodash@<4.18.1": "4.18.1",
+        "fast-xml-parser@<5.7.0": "5.7.0",
         "gatsby-parcel-config": {
             "@parcel/cache": "^2.16.3",
             "@parcel/core": "^2.16.3",

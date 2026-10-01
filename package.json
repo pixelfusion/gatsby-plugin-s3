@@ -48,6 +48,15 @@
         "gatsby-plugin-s3-example-with-serverless": "file:examples\\with-serverless"
     },
     "overrides": {
+        "fast-xml-parser@<5.7.0": "5.7.0",
+        "lodash@<4.18.1": "4.18.1",
+        "lodash.template@<4.18.0": "4.18.1",
+        "fast-uri@<3.1.8": "3.1.8",
+        "form-data@<4.0.6": "4.0.6",
+        "follow-redirects@<1.16.0": "1.16.0",
+        "picomatch@<2.3.2": "2.3.2",
+        "ajv@>=6.0.0 <6.15.0": "6.15.0",
+        "ajv@>=8.0.0 <8.20.0": "8.20.0",
         "gatsby-parcel-config": {
             "@parcel/cache": "^2.16.3",
             "@parcel/core": "^2.16.3",

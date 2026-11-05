@@ -27,5 +27,8 @@
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
   },
   "snyk": true,
-  "private": true
+  "private": true,
+  "overrides": {
+    "lodash@<4.18.1": "4.18.1"
+  }
 }
